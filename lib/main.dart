@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_neo_knowlage/Database/Controller/database_global_controller.dart';
+import 'package:project_neo_knowlage/Database/database.dart';
 import 'package:project_neo_knowlage/Features/login/view.dart';
 
 void main() {
@@ -17,7 +19,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: FutureBuilder<AppDatabase>(
+        future: DatabaseGlobalController.getDatabase(),
+        builder: (context, snapshot) {
+          if(snapshot.hasData) {
+              return LoginPage();
+            }
+          else {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+          }
+      ),
     );
   }
 }

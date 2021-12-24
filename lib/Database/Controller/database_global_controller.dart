@@ -5,7 +5,7 @@ import 'package:project_neo_knowlage/Database/database.dart';
 class DatabaseGlobalController extends GetxController{
 
   AppDatabase? database;
-  static final databaseName="pokemonCards";
+  static const databaseName="project_neo";
 
   DatabaseGlobalController(this.database);
 

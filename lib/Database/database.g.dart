@@ -110,7 +110,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Students` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `phoneNumber` TEXT NOT NULL, `email` TEXT NOT NULL, `deviceId` INTEGER NOT NULL, `courseId` INTEGER NOT NULL, FOREIGN KEY (`deviceId`) REFERENCES `Devices` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, FOREIGN KEY (`courseId`) REFERENCES `Courses` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Students_Answers` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `studentId` INTEGER NOT NULL, `answerId` INTEGER NOT NULL, FOREIGN KEY (`studentId`) REFERENCES `Students` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, FOREIGN KEY (`anwserId`) REFERENCES `Answers` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
+            'CREATE TABLE IF NOT EXISTS `Students_Answers` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `studentId` INTEGER NOT NULL, `answerId` INTEGER NOT NULL, FOREIGN KEY (`studentId`) REFERENCES `Students` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, FOREIGN KEY (`answerId`) REFERENCES `Answers` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
 
         await callback?.onCreate?.call(database, version);
       },
