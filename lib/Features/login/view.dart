@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+import 'controller.dart';
+
+class LoginPage extends StatelessWidget {
+  final LoginController controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +15,14 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
-              decoration: InputDecoration(label: Text("username")),
+              decoration: const InputDecoration(label: Text("username")),
             ),
             TextFormField(
-              decoration: InputDecoration(label: Text("password")),
+              decoration: const InputDecoration(label: Text("password")),
             ),
-            TextButton(onPressed: (){}, child: Text("Login"))
+            TextButton(onPressed: (){
+
+            }, child: const Text("Login"))
           ],
         ),
       ),
