@@ -6,16 +6,20 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          TextFormField(
-            decoration: InputDecoration(label: Text("username")),
-          ),
-          TextFormField(
-            decoration: InputDecoration(label: Text("password")),
-          ),
-
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(label: Text("username")),
+            ),
+            TextFormField(
+              decoration: InputDecoration(label: Text("password")),
+            ),
+            TextButton(onPressed: (){}, child: Text("Login"))
+          ],
+        ),
       ),
     );
   }
