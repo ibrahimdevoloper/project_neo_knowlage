@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:project_neo_knowlage/MQTT/configuration.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  MQTTClient mqtt = MQTTClient(server: "192.168.1.11", clientID: "id1");
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -39,10 +42,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    mqtt.connect().then((value) {
+      if (value) {
+        mqtt.subscribe("processing1", MqttQos.atLeastOnce);
+        mqtt.subscribe("processing2", MqttQos.atLeastOnce);
+        mqtt.publish("/hello", MqttQos.atLeastOnce, "hello from flutter");
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
       body: Center(
@@ -55,6 +69,28 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            const SizedBox(
+              height: 100,
+              width: double.infinity,
+            ),
+            const Text("data from MQTT"),
+            SizedBox(
+              width: 200,
+              height: 100,
+              child: StreamBuilder(
+                stream: mqtt.client.updates,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return Center(
+                        child: Text(mqtt.getStringData(snapshot.data)));
+                  }
+                },
+              ),
             ),
           ],
         ),

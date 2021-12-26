@@ -9,12 +9,11 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         children: [
           TextFormField(
-            decoration: InputDecoration(label: Text("username")),
+            decoration: const InputDecoration(label: Text("username")),
           ),
           TextFormField(
-            decoration: InputDecoration(label: Text("password")),
+            decoration: const InputDecoration(label: Text("password")),
           ),
-
         ],
       ),
     );
