@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_neo_knowlage/Features/couches/view.dart';
 
 import 'controller.dart';
 
@@ -21,8 +22,8 @@ class LoginPage extends StatelessWidget {
               decoration: const InputDecoration(label: Text("password")),
             ),
             TextButton(onPressed: (){
-
-            }, child: const Text("Login"))
+              Get.off(()=>CouchesPage());
+            }, child: const Text("Login"),),
           ],
         ),
       ),

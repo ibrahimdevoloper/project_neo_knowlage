@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         future: DatabaseGlobalController.getDatabase(),
         builder: (context, snapshot) {
           if(snapshot.hasData) {
+            Get.put(DatabaseGlobalController(snapshot.data));
               return LoginPage();
             }
           else {

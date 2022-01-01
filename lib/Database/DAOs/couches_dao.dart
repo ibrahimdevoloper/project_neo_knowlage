@@ -15,9 +15,9 @@ abstract class CouchDao {
   //TODO: add update and delete
 
   @Update(onConflict:OnConflictStrategy.replace)
-  Future<void> updateCouch(Couch answer);
+  Future<void> updateCouch(Couch couch);
 
   @delete
-  Future<void> deleteCouch(Couch answer);
+  Future<void> deleteCouch(Couch couch);
 
 }
