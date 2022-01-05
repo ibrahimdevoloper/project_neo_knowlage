@@ -12,5 +12,5 @@ class Couch {
   late String password;
   late bool isAdmin;
 
-  Couch(this.name, this.username, this.password, this.isAdmin);
+  Couch(this.id, this.name, this.username, this.password, this.isAdmin);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_neo_knowlage/Database/entities/couches.dart';
 
 import 'controller.dart';
 
@@ -24,11 +25,23 @@ class CouchesPage extends StatelessWidget {
               child: Text(controller.message),
             );
           } else {
-            return ListView.builder(itemBuilder: (context, i) {
-              return ListTile(
-                title: Text("$i"),
-              );
-            });
+            return ListView.builder(
+              itemBuilder: (context, i) {
+                Couch couch = controller.couches[i];
+                print(couch.id);
+                return ListTile(
+                  title: Text(couch.name),
+                  trailing: IconButton(
+                    onPressed: () {
+                      print("deletion perssed");
+                      controller.deleteCouch(couch);
+                    },
+                    icon: Icon(Icons.five_g),
+                  ),
+                );
+              },
+              itemCount: controller.couches.length,
+            );
           }
         },
       ),
@@ -77,56 +90,82 @@ class CouchAddBottomSheet extends StatelessWidget {
                   "Add A Couch",
                   style: Theme.of(context).textTheme.headline6,
                 ),
-                TextButton(
-                  onPressed: () {
-                    //TODO: add couch
-                  },
-                  child: const Text("Submit"),
-                ),
+                GetBuilder<CouchesController>(
+                    init: _controller,
+                    builder: (controller) {
+                      return TextButton(
+                        onPressed: () {
+                          //TODO: add couch
+                          controller.insertCouch();
+                        },
+                        child: const Text("Submit"),
+                      );
+                    }),
               ],
             ),
 
             //name
-            TextField(
-              onChanged: (value){
-                //TODO: save name
-              },
-              decoration: InputDecoration(label: Text("Couch's Name")),
-            ),
+            GetBuilder<CouchesController>(
+                init: _controller,
+                builder: (controller) {
+                  return TextField(
+                    onChanged: (value) {
+                      //TODO: save name
+                      controller.couchNameForAdding = value;
+                    },
+                    decoration: InputDecoration(label: Text("Couch's Name")),
+                  );
+                }),
             //username
-            TextField(
-              onChanged: (value){
-                //TODO: save username
-              },
-              decoration: InputDecoration(label: Text("Couch's Username")),
-            ),
+            GetBuilder<CouchesController>(
+                init: _controller,
+                builder: (controller) {
+                  return TextField(
+                    onChanged: (value) {
+                      //TODO: save username
+                      controller.couchUsernameForAdding = value;
+                    },
+                    decoration:
+                        InputDecoration(label: Text("Couch's Username")),
+                  );
+                }),
             Row(
               children: [
                 //password
                 Expanded(
-                    child: TextField(
-                      onChanged: (value){
-                        //TODO: save password
-                      },
-                  decoration: InputDecoration(
-                    label: Text("Couch's Password"),
-                  ),
-                  keyboardType: TextInputType.number,
-                )),
+                    child: GetBuilder<CouchesController>(
+                        init: _controller,
+                        builder: (controller) {
+                          return TextField(
+                            onChanged: (value) {
+                              //TODO: save password
+                              controller.couchPasswordForAdding = value;
+                            },
+                            decoration: InputDecoration(
+                              label: Text("Couch's Password"),
+                            ),
+                            keyboardType: TextInputType.number,
+                          );
+                        })),
                 SizedBox(
                   width: 8,
                 ),
                 //confirm password
                 Expanded(
-                    child: TextField(
-                      onChanged: (value){
-                        //TODO: save confirm password
-                      },
-                  decoration: InputDecoration(
-                    label: Text("Confirm Password"),
-                  ),
-                  keyboardType: TextInputType.number,
-                )),
+                    child: GetBuilder<CouchesController>(
+                        init: _controller,
+                        builder: (controller) {
+                          return TextField(
+                            onChanged: (value) {
+                              //TODO: save confirm password
+                              controller.couchConfirmPasswordForAdding = value;
+                            },
+                            decoration: InputDecoration(
+                              label: Text("Confirm Password"),
+                            ),
+                            keyboardType: TextInputType.number,
+                          );
+                        })),
               ],
             ),
             GetBuilder<CouchesController>(
@@ -137,18 +176,18 @@ class CouchAddBottomSheet extends StatelessWidget {
                     Expanded(
                         child: RadioListTile<bool>(
                       value: true,
-                      groupValue: _controller.isAdminForAdding,
+                      groupValue: controller.isAdminForAdding,
                       onChanged: (value) {
-                        _controller.isAdminForAdding=value!;
+                        controller.isAdminForAdding = value!;
                       },
                       title: Text("Admin"),
                     )),
                     Expanded(
                         child: RadioListTile<bool>(
                       value: false,
-                      groupValue: _controller.isAdminForAdding,
+                      groupValue: controller.isAdminForAdding,
                       onChanged: (value) {
-                        _controller.isAdminForAdding=value!;
+                        controller.isAdminForAdding = value!;
                       },
                       title: Text("Not an Admin"),
                     )),

@@ -40,6 +40,7 @@ class CouchesController extends GetxController {
     });
     //when data is updated, deleted, or inserted
     var onData = ((List<Couch> event) {
+      print("database: data from stream");
       if (event.isEmpty) {
         isLoading = false;
         isError = true;
@@ -47,8 +48,8 @@ class CouchesController extends GetxController {
         update();
       } else {
         isLoading = false;
-        _couches = event;
-        update();
+        couches = event;
+        // update();
       }
     });
     // when the connection has an error
@@ -64,16 +65,30 @@ class CouchesController extends GetxController {
         .listen(onData, onError: onError, onDone: onDone);
   }
 
-  Future insertCouch(Couch couch) async {
-    await _couchDao.insertCouch(couch);
+  isPasswordConfirmed() {
+    return couchConfirmPasswordForAdding.compareTo(couchPasswordForAdding) == 0;
+  }
+
+  Future insertCouch() async {
+    if (isPasswordConfirmed()) {
+      await _couchDao.insertCouch(Couch(null,
+          couchNameForAdding,
+          couchUsernameForAdding,
+          couchConfirmPasswordForAdding,
+          isAdminForAdding));
+      update();
+    } else
+      Get.snackbar("Error", "password don't match");
   }
 
   Future deleteCouch(Couch couch) async {
     await _couchDao.deleteCouch(couch);
+    update();
   }
 
   Future updateCouch(Couch couch) async {
     await _couchDao.updateCouch(couch);
+    update();
   }
 
   String get message => _message;
@@ -125,5 +140,12 @@ class CouchesController extends GetxController {
 
   set couchNameForAdding(String value) {
     _couchNameForAdding = value;
+  }
+
+  List<Couch> get couches => _couches;
+
+  set couches(List<Couch> value) {
+    _couches = value;
+    update();
   }
 }

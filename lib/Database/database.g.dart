@@ -315,6 +315,7 @@ class _$CouchDao extends CouchDao {
   Future<List<Couch>> findAllCouches() async {
     return _queryAdapter.queryList('SELECT * FROM Couches',
         mapper: (Map<String, Object?> row) => Couch(
+            row['id'] as int?,
             row['name'] as String,
             row['username'] as String,
             row['password'] as String,
@@ -325,6 +326,7 @@ class _$CouchDao extends CouchDao {
   Stream<List<Couch>> findAllCouchesAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Couches',
         mapper: (Map<String, Object?> row) => Couch(
+            row['id'] as int?,
             row['name'] as String,
             row['username'] as String,
             row['password'] as String,
@@ -339,13 +341,13 @@ class _$CouchDao extends CouchDao {
   }
 
   @override
-  Future<void> updateCouch(Couch answer) async {
-    await _couchUpdateAdapter.update(answer, OnConflictStrategy.replace);
+  Future<void> updateCouch(Couch couch) async {
+    await _couchUpdateAdapter.update(couch, OnConflictStrategy.replace);
   }
 
   @override
-  Future<void> deleteCouch(Couch answer) async {
-    await _couchDeletionAdapter.delete(answer);
+  Future<void> deleteCouch(Couch couch) async {
+    await _couchDeletionAdapter.delete(couch);
   }
 }
 
