@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_neo_knowlage/Features/couches/view.dart';
+import '../couches/views/screen.dart';
 
 import 'controller.dart';
 
