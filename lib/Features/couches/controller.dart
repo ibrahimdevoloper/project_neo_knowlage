@@ -48,8 +48,9 @@ class CouchesController extends GetxController {
         update();
       } else {
         isLoading = false;
+        isError = false;
         couches = event;
-        // update();
+        update();
       }
     });
     // when the connection has an error
@@ -81,7 +82,8 @@ class CouchesController extends GetxController {
       Get.snackbar("Error", "password don't match");
   }
 
-  Future deleteCouch(Couch couch) async {
+  Future deleteCouch(Couch couch) async{
+  //TODO: confirmation dialog
     await _couchDao.deleteCouch(couch);
     update();
   }

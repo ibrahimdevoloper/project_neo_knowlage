@@ -31,12 +31,23 @@ class CouchesPage extends StatelessWidget {
                 print(couch.id);
                 return ListTile(
                   title: Text(couch.name),
-                  trailing: IconButton(
-                    onPressed: () {
-                      print("deletion perssed");
-                      controller.deleteCouch(couch);
-                    },
-                    icon: Icon(Icons.five_g),
+                  trailing: SizedBox(
+                    width: 100,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            controller.deleteCouch(couch);
+                          },
+                          icon: Icon(Icons.delete),
+                        ),IconButton(
+                          onPressed: () {
+                            controller.deleteCouch(couch);
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
