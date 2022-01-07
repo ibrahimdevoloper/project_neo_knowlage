@@ -15,5 +15,5 @@ class Question {
   late String question;
   late int sessionId;
 
-  Question(this.question, this.sessionId);
+  Question(this.id,this.question, this.sessionId);
 }

@@ -11,5 +11,5 @@ class Device {
 
   //TODO: add devices information
 
-  Device();
+  Device(this.id,);
 }

@@ -211,15 +211,21 @@ class _$AnswerDao extends AnswerDao {
   @override
   Future<List<Answer>> findAllAnswers() async {
     return _queryAdapter.queryList('SELECT * FROM Answers',
-        mapper: (Map<String, Object?> row) => Answer(row['answer'] as String,
-            (row['isCorrect'] as int) != 0, row['questionId'] as String));
+        mapper: (Map<String, Object?> row) => Answer(
+            row['id'] as int?,
+            row['answer'] as String,
+            (row['isCorrect'] as int) != 0,
+            row['questionId'] as String));
   }
 
   @override
   Stream<List<Answer>> findAllAnswersAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Answers',
-        mapper: (Map<String, Object?> row) => Answer(row['answer'] as String,
-            (row['isCorrect'] as int) != 0, row['questionId'] as String),
+        mapper: (Map<String, Object?> row) => Answer(
+            row['id'] as int?,
+            row['answer'] as String,
+            (row['isCorrect'] as int) != 0,
+            row['questionId'] as String),
         queryableName: 'Answers',
         isView: false);
   }
@@ -228,8 +234,11 @@ class _$AnswerDao extends AnswerDao {
   Future<List<Answer>> findAllAnswersByQuestionId(int id) async {
     return _queryAdapter.queryList(
         'SELECT * FROM Answers WHERE questionId = ?1',
-        mapper: (Map<String, Object?> row) => Answer(row['answer'] as String,
-            (row['isCorrect'] as int) != 0, row['questionId'] as String),
+        mapper: (Map<String, Object?> row) => Answer(
+            row['id'] as int?,
+            row['answer'] as String,
+            (row['isCorrect'] as int) != 0,
+            row['questionId'] as String),
         arguments: [id]);
   }
 
@@ -237,8 +246,11 @@ class _$AnswerDao extends AnswerDao {
   Stream<List<Answer>> findAllAnswersByQuestionIdAsStream(int id) {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Answers WHERE questionId = ?1',
-        mapper: (Map<String, Object?> row) => Answer(row['answer'] as String,
-            (row['isCorrect'] as int) != 0, row['questionId'] as String),
+        mapper: (Map<String, Object?> row) => Answer(
+            row['id'] as int?,
+            row['answer'] as String,
+            (row['isCorrect'] as int) != 0,
+            row['questionId'] as String),
         arguments: [id],
         queryableName: 'Answers',
         isView: false);
@@ -406,6 +418,7 @@ class _$CourseDao extends CourseDao {
   Future<List<Course>> findAllCourses() async {
     return _queryAdapter.queryList('SELECT * FROM Courses',
         mapper: (Map<String, Object?> row) => Course(
+            row['id'] as int?,
             row['name'] as String,
             row['startDateTime'] as String,
             row['endDateTime'] as String,
@@ -416,6 +429,7 @@ class _$CourseDao extends CourseDao {
   Stream<List<Course>> findAllCoursesAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Courses',
         mapper: (Map<String, Object?> row) => Course(
+            row['id'] as int?,
             row['name'] as String,
             row['startDateTime'] as String,
             row['endDateTime'] as String,
@@ -428,6 +442,7 @@ class _$CourseDao extends CourseDao {
   Future<List<Course>> findAllCoursesByCouchId(int id) async {
     return _queryAdapter.queryList('SELECT * FROM Courses WHERE couchId = ?1',
         mapper: (Map<String, Object?> row) => Course(
+            row['id'] as int?,
             row['name'] as String,
             row['startDateTime'] as String,
             row['endDateTime'] as String,
@@ -440,6 +455,7 @@ class _$CourseDao extends CourseDao {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Courses WHERE couchId = ?1',
         mapper: (Map<String, Object?> row) => Course(
+            row['id'] as int?,
             row['name'] as String,
             row['startDateTime'] as String,
             row['endDateTime'] as String,
@@ -490,13 +506,13 @@ class _$DeviceDao extends DeviceDao {
   @override
   Future<List<Device>> findAllDevices() async {
     return _queryAdapter.queryList('SELECT * FROM Devices',
-        mapper: (Map<String, Object?> row) => Device());
+        mapper: (Map<String, Object?> row) => Device(row['id'] as int?));
   }
 
   @override
   Stream<List<Device>> findAllDevicesAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Devices',
-        mapper: (Map<String, Object?> row) => Device(),
+        mapper: (Map<String, Object?> row) => Device(row['id'] as int?),
         queryableName: 'Devices',
         isView: false);
   }
@@ -565,15 +581,15 @@ class _$QuestionDao extends QuestionDao {
   @override
   Future<List<Question>> findAllQuestions() async {
     return _queryAdapter.queryList('SELECT * FROM Questions',
-        mapper: (Map<String, Object?> row) =>
-            Question(row['question'] as String, row['sessionId'] as int));
+        mapper: (Map<String, Object?> row) => Question(row['id'] as int?,
+            row['question'] as String, row['sessionId'] as int));
   }
 
   @override
   Stream<List<Question>> findAllQuestionsAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Questions',
-        mapper: (Map<String, Object?> row) =>
-            Question(row['question'] as String, row['sessionId'] as int),
+        mapper: (Map<String, Object?> row) => Question(row['id'] as int?,
+            row['question'] as String, row['sessionId'] as int),
         queryableName: 'Questions',
         isView: false);
   }
@@ -582,8 +598,8 @@ class _$QuestionDao extends QuestionDao {
   Future<List<Question>> findAllQuestionsBySessionId(int id) async {
     return _queryAdapter.queryList(
         'SELECT * FROM Questions WHERE sessionId = ?1',
-        mapper: (Map<String, Object?> row) =>
-            Question(row['question'] as String, row['sessionId'] as int),
+        mapper: (Map<String, Object?> row) => Question(row['id'] as int?,
+            row['question'] as String, row['sessionId'] as int),
         arguments: [id]);
   }
 
@@ -591,8 +607,8 @@ class _$QuestionDao extends QuestionDao {
   Stream<List<Question>> findAllQuestionsBySessionIdAsStream(int id) {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Questions WHERE sessionId = ?1',
-        mapper: (Map<String, Object?> row) =>
-            Question(row['question'] as String, row['sessionId'] as int),
+        mapper: (Map<String, Object?> row) => Question(row['id'] as int?,
+            row['question'] as String, row['sessionId'] as int),
         arguments: [id],
         queryableName: 'Questions',
         isView: false);
@@ -669,6 +685,7 @@ class _$SessionDao extends SessionDao {
   Future<List<Session>> findAllSessions() async {
     return _queryAdapter.queryList('SELECT * FROM Sessions',
         mapper: (Map<String, Object?> row) => Session(
+            row['id'] as int?,
             row['title'] as String,
             row['description'] as String,
             row['filePath'] as String,
@@ -679,6 +696,7 @@ class _$SessionDao extends SessionDao {
   Stream<List<Session>> findAllSessionsAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Sessions',
         mapper: (Map<String, Object?> row) => Session(
+            row['id'] as int?,
             row['title'] as String,
             row['description'] as String,
             row['filePath'] as String,
@@ -691,6 +709,7 @@ class _$SessionDao extends SessionDao {
   Future<List<Session>> findAllSessionsByCourseId(int id) async {
     return _queryAdapter.queryList('SELECT * FROM Sessions WHERE courseId = ?1',
         mapper: (Map<String, Object?> row) => Session(
+            row['id'] as int?,
             row['title'] as String,
             row['description'] as String,
             row['filePath'] as String,
@@ -703,6 +722,7 @@ class _$SessionDao extends SessionDao {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Sessions WHERE courseId = ?1',
         mapper: (Map<String, Object?> row) => Session(
+            row['id'] as int?,
             row['title'] as String,
             row['description'] as String,
             row['filePath'] as String,
@@ -786,6 +806,7 @@ class _$StudentDao extends StudentDao {
   Future<List<Student>> findAllStudents() async {
     return _queryAdapter.queryList('SELECT * FROM Students',
         mapper: (Map<String, Object?> row) => Student(
+            row['id'] as int?,
             row['name'] as String,
             row['phoneNumber'] as String,
             row['email'] as String,
@@ -797,6 +818,7 @@ class _$StudentDao extends StudentDao {
   Stream<List<Student>> findAllStudentsAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Students',
         mapper: (Map<String, Object?> row) => Student(
+            row['id'] as int?,
             row['name'] as String,
             row['phoneNumber'] as String,
             row['email'] as String,
@@ -810,6 +832,7 @@ class _$StudentDao extends StudentDao {
   Future<List<Student>> findAllStudentsByDeviceId(int id) async {
     return _queryAdapter.queryList('SELECT * FROM Students WHERE deviceId = ?1',
         mapper: (Map<String, Object?> row) => Student(
+            row['id'] as int?,
             row['name'] as String,
             row['phoneNumber'] as String,
             row['email'] as String,
@@ -823,6 +846,7 @@ class _$StudentDao extends StudentDao {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Students WHERE deviceId = ?1',
         mapper: (Map<String, Object?> row) => Student(
+            row['id'] as int?,
             row['name'] as String,
             row['phoneNumber'] as String,
             row['email'] as String,
@@ -837,6 +861,7 @@ class _$StudentDao extends StudentDao {
   Future<List<Student>> findAllStudentsByCourseId(int id) async {
     return _queryAdapter.queryList('SELECT * FROM Students WHERE courseId = ?1',
         mapper: (Map<String, Object?> row) => Student(
+            row['id'] as int?,
             row['name'] as String,
             row['phoneNumber'] as String,
             row['email'] as String,
@@ -850,6 +875,7 @@ class _$StudentDao extends StudentDao {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Students WHERE courseId = ?1',
         mapper: (Map<String, Object?> row) => Student(
+            row['id'] as int?,
             row['name'] as String,
             row['phoneNumber'] as String,
             row['email'] as String,
@@ -924,15 +950,15 @@ class _$StudentsAnswerDao extends StudentsAnswerDao {
   @override
   Future<List<StudentsAnswer>> findAllStudentsAnswer() async {
     return _queryAdapter.queryList('SELECT * FROM Students_Answers',
-        mapper: (Map<String, Object?> row) =>
-            StudentsAnswer(row['studentId'] as int, row['answerId'] as int));
+        mapper: (Map<String, Object?> row) => StudentsAnswer(row['id'] as int?,
+            row['studentId'] as int, row['answerId'] as int));
   }
 
   @override
   Stream<List<StudentsAnswer>> findAllStudentsAnswerAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Students_Answers',
-        mapper: (Map<String, Object?> row) =>
-            StudentsAnswer(row['studentId'] as int, row['answerId'] as int),
+        mapper: (Map<String, Object?> row) => StudentsAnswer(
+            row['id'] as int?, row['studentId'] as int, row['answerId'] as int),
         queryableName: 'Students_Answers',
         isView: false);
   }
@@ -941,8 +967,8 @@ class _$StudentsAnswerDao extends StudentsAnswerDao {
   Future<List<StudentsAnswer>> findAllStudentsAnswersByStudentId(int id) async {
     return _queryAdapter.queryList(
         'SELECT * FROM Students_Answers WHERE studentId = ?1',
-        mapper: (Map<String, Object?> row) =>
-            StudentsAnswer(row['studentId'] as int, row['answerId'] as int),
+        mapper: (Map<String, Object?> row) => StudentsAnswer(
+            row['id'] as int?, row['studentId'] as int, row['answerId'] as int),
         arguments: [id]);
   }
 
@@ -951,8 +977,8 @@ class _$StudentsAnswerDao extends StudentsAnswerDao {
       int id) {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Students_Answers WHERE studentId = ?1',
-        mapper: (Map<String, Object?> row) =>
-            StudentsAnswer(row['studentId'] as int, row['answerId'] as int),
+        mapper: (Map<String, Object?> row) => StudentsAnswer(
+            row['id'] as int?, row['studentId'] as int, row['answerId'] as int),
         arguments: [id],
         queryableName: 'Students_Answers',
         isView: false);
@@ -962,8 +988,8 @@ class _$StudentsAnswerDao extends StudentsAnswerDao {
   Future<List<StudentsAnswer>> findAllStudentsAnswersByAnswerId(int id) async {
     return _queryAdapter.queryList(
         'SELECT * FROM Students_Answers WHERE answerId = ?1',
-        mapper: (Map<String, Object?> row) =>
-            StudentsAnswer(row['studentId'] as int, row['answerId'] as int),
+        mapper: (Map<String, Object?> row) => StudentsAnswer(
+            row['id'] as int?, row['studentId'] as int, row['answerId'] as int),
         arguments: [id]);
   }
 
@@ -972,8 +998,8 @@ class _$StudentsAnswerDao extends StudentsAnswerDao {
       int id) {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Students_Answers WHERE answerId = ?1',
-        mapper: (Map<String, Object?> row) =>
-            StudentsAnswer(row['studentId'] as int, row['answerId'] as int),
+        mapper: (Map<String, Object?> row) => StudentsAnswer(
+            row['id'] as int?, row['studentId'] as int, row['answerId'] as int),
         arguments: [id],
         queryableName: 'Students_Answers',
         isView: false);

@@ -18,5 +18,5 @@ class Course {
   late String endDateTime;
   late int couchId;
 
-  Course(this.name, this.startDateTime, this.endDateTime, this.couchId);
+  Course(this.id,this.name, this.startDateTime, this.endDateTime, this.couchId);
 }

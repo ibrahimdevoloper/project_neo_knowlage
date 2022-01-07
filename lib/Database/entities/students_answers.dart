@@ -20,5 +20,5 @@ class StudentsAnswer {
   late int studentId;
   late int answerId;
 
-  StudentsAnswer(this.studentId, this.answerId);
+  StudentsAnswer(this.id,this.studentId, this.answerId);
 }

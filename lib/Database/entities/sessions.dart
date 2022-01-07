@@ -16,5 +16,5 @@ class Session {
   late String filePath;
   late int courseId;
 
-  Session(this.title, this.description, this.filePath, this.courseId);
+  Session(this.id,this.title, this.description, this.filePath, this.courseId);
 }
