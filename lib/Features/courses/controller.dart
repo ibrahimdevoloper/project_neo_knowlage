@@ -77,8 +77,8 @@ class CoursesController extends GetxController {
 
   Future insertCouch() async {
     if (isPasswordConfirmed()) {
+      //TODO: add course
       // await _courseDao.insertCourse(
-        //TODO: add course
       // );
       update();
     } else
