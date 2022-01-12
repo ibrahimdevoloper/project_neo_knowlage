@@ -14,9 +14,12 @@ class Course {
 
   late String name;
   /// we put here both the date and time
-  late String startDateTime;
-  late String endDateTime;
+  late String startDate;
+  late String endDate;
+  late String startTime;
+  late String endTime;
   late int couchId;
 
-  Course(this.id,this.name, this.startDateTime, this.endDateTime, this.couchId);
+  Course(this.id, this.name, this.startDate, this.endDate, this.startTime,
+      this.endTime, this.couchId);
 }

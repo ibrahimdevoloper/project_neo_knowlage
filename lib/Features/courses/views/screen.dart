@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_neo_knowlage/Database/entities/courses.dart';
+import 'package:project_neo_knowlage/Features/couches/views/couch_add_bottom_sheet.dart';
 import 'package:project_neo_knowlage/Features/courses/controller.dart';
 import 'package:project_neo_knowlage/Features/courses/views/course_update_bottom_sheet.dart';
 
@@ -49,7 +50,7 @@ class CoursesPage extends StatelessWidget {
                             Get.bottomSheet(
                               CourseUpdateBottomSheet(
                                 controller: controller,
-                                couch: course,
+                                course: course,
                               ),
                             );
                           },

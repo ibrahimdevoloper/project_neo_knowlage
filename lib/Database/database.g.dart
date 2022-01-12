@@ -100,7 +100,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Couches` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `username` TEXT NOT NULL, `password` TEXT NOT NULL, `isAdmin` INTEGER NOT NULL)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Courses` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `startDateTime` TEXT NOT NULL, `endDateTime` TEXT NOT NULL, `couchId` INTEGER NOT NULL, FOREIGN KEY (`couchId`) REFERENCES `Couches` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
+            'CREATE TABLE IF NOT EXISTS `Courses` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `startDate` TEXT NOT NULL, `endDate` TEXT NOT NULL, `startTime` TEXT NOT NULL, `endTime` TEXT NOT NULL, `couchId` INTEGER NOT NULL, FOREIGN KEY (`couchId`) REFERENCES `Couches` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Devices` (`id` INTEGER PRIMARY KEY AUTOINCREMENT)');
         await database.execute(
@@ -372,8 +372,10 @@ class _$CourseDao extends CourseDao {
             (Course item) => <String, Object?>{
                   'id': item.id,
                   'name': item.name,
-                  'startDateTime': item.startDateTime,
-                  'endDateTime': item.endDateTime,
+                  'startDate': item.startDate,
+                  'endDate': item.endDate,
+                  'startTime': item.startTime,
+                  'endTime': item.endTime,
                   'couchId': item.couchId
                 },
             changeListener),
@@ -384,8 +386,10 @@ class _$CourseDao extends CourseDao {
             (Course item) => <String, Object?>{
                   'id': item.id,
                   'name': item.name,
-                  'startDateTime': item.startDateTime,
-                  'endDateTime': item.endDateTime,
+                  'startDate': item.startDate,
+                  'endDate': item.endDate,
+                  'startTime': item.startTime,
+                  'endTime': item.endTime,
                   'couchId': item.couchId
                 },
             changeListener),
@@ -396,8 +400,10 @@ class _$CourseDao extends CourseDao {
             (Course item) => <String, Object?>{
                   'id': item.id,
                   'name': item.name,
-                  'startDateTime': item.startDateTime,
-                  'endDateTime': item.endDateTime,
+                  'startDate': item.startDate,
+                  'endDate': item.endDate,
+                  'startTime': item.startTime,
+                  'endTime': item.endTime,
                   'couchId': item.couchId
                 },
             changeListener);
@@ -420,8 +426,10 @@ class _$CourseDao extends CourseDao {
         mapper: (Map<String, Object?> row) => Course(
             row['id'] as int?,
             row['name'] as String,
-            row['startDateTime'] as String,
-            row['endDateTime'] as String,
+            row['startDate'] as String,
+            row['endDate'] as String,
+            row['startTime'] as String,
+            row['endTime'] as String,
             row['couchId'] as int));
   }
 
@@ -431,8 +439,10 @@ class _$CourseDao extends CourseDao {
         mapper: (Map<String, Object?> row) => Course(
             row['id'] as int?,
             row['name'] as String,
-            row['startDateTime'] as String,
-            row['endDateTime'] as String,
+            row['startDate'] as String,
+            row['endDate'] as String,
+            row['startTime'] as String,
+            row['endTime'] as String,
             row['couchId'] as int),
         queryableName: 'Courses',
         isView: false);
@@ -444,8 +454,10 @@ class _$CourseDao extends CourseDao {
         mapper: (Map<String, Object?> row) => Course(
             row['id'] as int?,
             row['name'] as String,
-            row['startDateTime'] as String,
-            row['endDateTime'] as String,
+            row['startDate'] as String,
+            row['endDate'] as String,
+            row['startTime'] as String,
+            row['endTime'] as String,
             row['couchId'] as int),
         arguments: [id]);
   }
@@ -457,8 +469,10 @@ class _$CourseDao extends CourseDao {
         mapper: (Map<String, Object?> row) => Course(
             row['id'] as int?,
             row['name'] as String,
-            row['startDateTime'] as String,
-            row['endDateTime'] as String,
+            row['startDate'] as String,
+            row['endDate'] as String,
+            row['startTime'] as String,
+            row['endTime'] as String,
             row['couchId'] as int),
         arguments: [id],
         queryableName: 'Courses',
