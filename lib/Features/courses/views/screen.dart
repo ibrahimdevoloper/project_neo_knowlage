@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:project_neo_knowlage/Database/entities/courses.dart';
 import 'package:project_neo_knowlage/Features/couches/views/couch_add_bottom_sheet.dart';
 import 'package:project_neo_knowlage/Features/courses/controller.dart';
+import 'package:project_neo_knowlage/Features/courses/views/course_add_bottom_sheet.dart';
 import 'package:project_neo_knowlage/Features/courses/views/course_update_bottom_sheet.dart';
 
 class CoursesPage extends StatelessWidget {
   late CoursesController controller;
   late String _couchName;
 
-  CoursesPage({Key? key, required int couchId, required String couchName})
-      : controller = Get.put(CoursesController(couchId)),
+  CoursesPage({Key? key, required int? couchId, required String couchName})
+      : controller = Get.put(CoursesController(couchId!)),
         _couchName = couchName,
         super(key: key);
 
@@ -41,18 +42,18 @@ class CoursesPage extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {
-                            controller.deleteCouch(course);
+                            // controller.deleteCouch(course);
                           },
                           icon: const Icon(Icons.delete),
                         ),
                         IconButton(
                           onPressed: () {
-                            Get.bottomSheet(
-                              CourseUpdateBottomSheet(
-                                controller: controller,
-                                course: course,
-                              ),
-                            );
+                            // Get.bottomSheet(
+                            //   CourseUpdateBottomSheet(
+                            //     controller: controller,
+                            //     course: course,
+                            //   ),
+                            // );
                           },
                           icon: const Icon(Icons.edit),
                         ),
@@ -69,7 +70,7 @@ class CoursesPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.bottomSheet(
-            CouchAddBottomSheet(controller: controller),
+            CourseAddBottomSheet(controller: controller),
           );
         },
       ),

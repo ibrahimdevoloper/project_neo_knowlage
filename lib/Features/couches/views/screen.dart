@@ -4,6 +4,7 @@ import 'package:project_neo_knowlage/Database/entities/couches.dart';
 import 'package:project_neo_knowlage/Features/couches/controller.dart';
 import 'package:project_neo_knowlage/Features/couches/views/couch_add_bottom_sheet.dart';
 import 'package:project_neo_knowlage/Features/couches/views/couch_update_bottom_sheet.dart';
+import 'package:project_neo_knowlage/Features/courses/views/screen.dart';
 
 import '../controller.dart';
 
@@ -33,6 +34,9 @@ class CouchesPage extends StatelessWidget {
                 Couch couch = controller.couches[i];
                 print(couch.id);
                 return ListTile(
+                  onTap: (){
+                    Get.to(()=>CoursesPage(couchId: couch.id,couchName:couch.name ,));
+                  },
                   title: Text(couch.name),
                   trailing: SizedBox(
                     width: 100,

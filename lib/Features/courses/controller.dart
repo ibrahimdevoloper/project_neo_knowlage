@@ -12,16 +12,16 @@ class CoursesController extends GetxController {
 
   /// for database basic functions
   late CourseDao _courseDao;
+
   /// to know the who get courses
   late int _couchId;
 
-  /// For adding Couch
-  String? _couchNameForAdding;
-  String? _couchUsernameForAdding;
-  String? _couchPasswordForAdding;
-  String? _couchConfirmPasswordForAdding;
-  bool _isAdminForAdding = false;
-
+  /// For adding Course
+  String? _courseNameForAdding;
+  String? _courseStartDateForAdding;
+  String? _courseEndDateForAdding;
+  String? _courseStartTimeForAdding;
+  String? _courseEndTimeForAdding;
 
   CoursesController(this._couchId);
 
@@ -70,29 +70,35 @@ class CoursesController extends GetxController {
         .findAllCoursesByCouchIdAsStream(_couchId)
         .listen(onData, onError: onError, onDone: onDone);
   }
+  //
+  // isPasswordConfirmed() {
+  //   return couchConfirmPasswordForAdding.compareTo(couchPasswordForAdding) == 0;
+  // }
 
-  isPasswordConfirmed() {
-    return couchConfirmPasswordForAdding.compareTo(couchPasswordForAdding) == 0;
-  }
-
-  Future insertCouch() async {
-    if (isPasswordConfirmed()) {
+  Future insertCourse() async {
       //TODO: add course
-      // await _courseDao.insertCourse(
-      // );
+      await _courseDao.insertCourse(
+        Course(
+          null,
+          _courseNameForAdding!,
+          _courseStartDateForAdding!,
+          _courseEndDateForAdding!,
+          _courseStartTimeForAdding!,
+          _courseEndTimeForAdding!,
+          couchId,
+        ),
+      );
       update();
-    } else
-      Get.snackbar("Error", "password don't match");
   }
 
-  Future deleteCouch(Course course) async{
+  Future deleteCourse(Course course) async {
     //TODO: confirmation dialog
     //TODO: delete course
     // await _couchDao.deleteCouch(couch);
     update();
   }
 
-  Future updateCouch(Course course) async {
+  Future updateCourse(Course course) async {
     // await _couchDao.updateCouch(couch);
     //TODO: update course
     update();
@@ -118,37 +124,6 @@ class CoursesController extends GetxController {
     update();
   }
 
-  bool get isAdminForAdding => _isAdminForAdding;
-
-  set isAdminForAdding(bool value) {
-    _isAdminForAdding = value;
-    update();
-  }
-
-  String get couchConfirmPasswordForAdding => _couchConfirmPasswordForAdding!;
-
-  set couchConfirmPasswordForAdding(String value) {
-    _couchConfirmPasswordForAdding = value;
-  }
-
-  String get couchPasswordForAdding => _couchPasswordForAdding!;
-
-  set couchPasswordForAdding(String value) {
-    _couchPasswordForAdding = value;
-  }
-
-  String get couchUsernameForAdding => _couchUsernameForAdding!;
-
-  set couchUsernameForAdding(String value) {
-    _couchUsernameForAdding = value;
-  }
-
-  String get couchNameForAdding => _couchNameForAdding!;
-
-  set couchNameForAdding(String value) {
-    _couchNameForAdding = value;
-  }
-
   List<Course> get courses => _courses;
 
   set courses(List<Course> value) {
@@ -159,5 +134,35 @@ class CoursesController extends GetxController {
 
   set couchId(int value) {
     _couchId = value;
+  }
+
+  String get courseEndTimeForAdding => _courseEndTimeForAdding!;
+
+  set courseEndTimeForAdding(String value) {
+    _courseEndTimeForAdding = value;
+  }
+
+  String get courseStartTimeForAdding => _courseStartTimeForAdding!;
+
+  set courseStartTimeForAdding(String value) {
+    _courseStartTimeForAdding = value;
+  }
+
+  String get courseEndDateForAdding => _courseEndDateForAdding!;
+
+  set courseEndDateForAdding(String value) {
+    _courseEndDateForAdding = value;
+  }
+
+  String get courseStartDateForAdding => _courseStartDateForAdding!;
+
+  set courseStartDateForAdding(String value) {
+    _courseStartDateForAdding = value;
+  }
+
+  String get courseNameForAdding => _courseNameForAdding!;
+
+  set courseNameForAdding(String value) {
+    _courseNameForAdding = value;
   }
 }
