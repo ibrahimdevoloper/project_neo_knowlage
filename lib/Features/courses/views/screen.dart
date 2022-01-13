@@ -48,12 +48,12 @@ class CoursesPage extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            // Get.bottomSheet(
-                            //   CourseUpdateBottomSheet(
-                            //     controller: controller,
-                            //     course: course,
-                            //   ),
-                            // );
+                            Get.bottomSheet(
+                              CourseUpdateBottomSheet(
+                                controller: controller,
+                                course: course,
+                              ),
+                            );
                           },
                           icon: const Icon(Icons.edit),
                         ),
