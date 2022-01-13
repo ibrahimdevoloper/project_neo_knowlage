@@ -42,7 +42,7 @@ class CoursesPage extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {
-                            // controller.deleteCouch(course);
+                            controller.deleteCourse(course);
                           },
                           icon: const Icon(Icons.delete),
                         ),

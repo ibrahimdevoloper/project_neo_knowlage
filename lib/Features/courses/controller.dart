@@ -94,8 +94,7 @@ class CoursesController extends GetxController {
 
   Future deleteCourse(Course course) async {
     //TODO: confirmation dialog
-    //TODO: delete course
-    // await _couchDao.deleteCouch(couch);
+    _courseDao.deleteCourse(course);
     update();
   }
 
