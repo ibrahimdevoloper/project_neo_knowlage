@@ -77,6 +77,7 @@ class CoursesController extends GetxController {
 
   Future insertCourse() async {
       //TODO: add course
+    print(_couchId);
       await _courseDao.insertCourse(
         Course(
           null,
@@ -136,33 +137,38 @@ class CoursesController extends GetxController {
     _couchId = value;
   }
 
-  String get courseEndTimeForAdding => _courseEndTimeForAdding!;
+  String? get courseEndTimeForAdding => _courseEndTimeForAdding;
 
-  set courseEndTimeForAdding(String value) {
+  set courseEndTimeForAdding(String? value) {
     _courseEndTimeForAdding = value;
+    update();
   }
 
-  String get courseStartTimeForAdding => _courseStartTimeForAdding!;
+  String? get courseStartTimeForAdding => _courseStartTimeForAdding;
 
-  set courseStartTimeForAdding(String value) {
+  set courseStartTimeForAdding(String? value) {
     _courseStartTimeForAdding = value;
+    update();
   }
 
-  String get courseEndDateForAdding => _courseEndDateForAdding!;
+  String? get courseEndDateForAdding => _courseEndDateForAdding;
 
-  set courseEndDateForAdding(String value) {
+  set courseEndDateForAdding(String? value) {
     _courseEndDateForAdding = value;
+    update();
   }
 
-  String get courseStartDateForAdding => _courseStartDateForAdding!;
+  String? get courseStartDateForAdding => _courseStartDateForAdding;
 
-  set courseStartDateForAdding(String value) {
+  set courseStartDateForAdding(String? value) {
     _courseStartDateForAdding = value;
+    update();
   }
 
-  String get courseNameForAdding => _courseNameForAdding!;
+  String? get courseNameForAdding => _courseNameForAdding;
 
-  set courseNameForAdding(String value) {
+  set courseNameForAdding(String? value) {
     _courseNameForAdding = value;
+    update();
   }
 }

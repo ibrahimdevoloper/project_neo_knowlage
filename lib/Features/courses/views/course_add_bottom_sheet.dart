@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_neo_knowlage/Features/couches/controller.dart';
 import 'package:project_neo_knowlage/Features/courses/controller.dart';
+import 'package:project_neo_knowlage/functions/dateFormatter.dart';
 
 class CourseAddBottomSheet extends StatelessWidget {
   late CoursesController _controller;
@@ -64,106 +65,101 @@ class CourseAddBottomSheet extends StatelessWidget {
                     decoration: InputDecoration(label: Text("Course's Name")),
                   );
                 }),
-            //username
-            GetBuilder<CoursesController>(
-                init: _controller,
-                builder: (controller) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(onPressed: (){
-                        showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(DateTime.now().year-1),
-                            lastDate: DateTime(2030),
-                            builder: (BuildContext context, Widget? child) {
-                              return Theme(
-                                data: ThemeData.dark(),
-                                child: child!,
-                              );
-                            }
-                            ,
-                        );
-                      }, child: Text("Start Date")),
-                      ElevatedButton(onPressed: (){}, child: Text("End Date")),
-                    ],
-                  );
-                  // return TextField(
-                  //   onChanged: (value) {
-                  //     //TODO: save username
-                  //     controller.couchUsernameForAdding = value;
-                  //   },
-                  //   decoration:
-                  //   InputDecoration(label: Text("Couch's Username")),
-                  // );
-                }),
-            // Row(
-            //   children: [
-            //     //password
-            //     Expanded(
-            //         child: GetBuilder<CoursesController>(
-            //             init: _controller,
-            //             builder: (controller) {
-            //               return TextField(
-            //                 onChanged: (value) {
-            //                   //TODO: save password
-            //                   controller.couchPasswordForAdding = value;
-            //                 },
-            //                 decoration: InputDecoration(
-            //                   label: Text("Couch's Password"),
-            //                 ),
-            //                 keyboardType: TextInputType.number,
-            //               );
-            //             })),
-            //     SizedBox(
-            //       width: 8,
-            //     ),
-            //     //confirm password
-            //     Expanded(
-            //         child: GetBuilder<CoursesController>(
-            //             init: _controller,
-            //             builder: (controller) {
-            //               return TextField(
-            //                 onChanged: (value) {
-            //                   //TODO: save confirm password
-            //                   controller.couchConfirmPasswordForAdding = value;
-            //                 },
-            //                 decoration: InputDecoration(
-            //                   label: Text("Confirm Password"),
-            //                 ),
-            //                 keyboardType: TextInputType.number,
-            //               );
-            //             })),
-            //   ],
-            // ),
-            // GetBuilder<CoursesController>(
-            //   init: _controller,
-            //   builder: (controller) {
-            //     return Row(
-            //       children: [
-            //         Expanded(
-            //             child: RadioListTile<bool>(
-            //               value: true,
-            //               groupValue: controller.isAdminForAdding,
-            //               onChanged: (value) {
-            //                 controller.isAdminForAdding = value!;
-            //               },
-            //               title: Text("Admin"),
-            //             )),
-            //         Expanded(
-            //             child: RadioListTile<bool>(
-            //               value: false,
-            //               groupValue: controller.isAdminForAdding,
-            //               onChanged: (value) {
-            //                 controller.isAdminForAdding = value!;
-            //               },
-            //               title: Text("Not an Admin"),
-            //             )),
-            //       ],
-            //     );
-            //   },
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                //start date
+                GetBuilder<CoursesController>(
+                    init: _controller,
+                    builder: (controller) {
+                      return ElevatedButton(
+                          onPressed: () {
+                            showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(DateTime.now().year - 1),
+                              lastDate: DateTime(2030),
+                              builder: (BuildContext context, Widget? child) {
+                                return Theme(
+                                  data: ThemeData.dark(),
+                                  child: child!,
+                                );
+                              },
+                            ).then((value) {
+                              controller.courseStartDateForAdding = dateFormater(value!);
+                            });
+                          },
+                          child: Text(controller.courseStartDateForAdding==null?"Start Date":"Start Date: ${controller.courseStartDateForAdding}"));
+                    }),
+                //End date
+                GetBuilder<CoursesController>(
+                    init: _controller,
+                    builder: (controller) {
+                      return ElevatedButton(
+                          onPressed: () {
+                            showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(DateTime.now().year - 1),
+                              lastDate: DateTime(2030),
+                              builder: (BuildContext context, Widget? child) {
+                                return Theme(
+                                  data: ThemeData.dark(),
+                                  child: child!,
+                                );
+                              },
+                            ).then((value) {
+                              controller.courseEndDateForAdding = dateFormater(value!);                            });
+                          },
+                          child: Text(controller.courseEndDateForAdding==null?"End Date":"End Date: ${controller.courseEndDateForAdding}"));
+                    }),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                //start date
+                GetBuilder<CoursesController>(
+                    init: _controller,
+                    builder: (controller) {
+                      return ElevatedButton(
+                          onPressed: () {
+                            showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.now(),
+                                builder: (context, child) {
+                                  return Theme(
+                                    data: ThemeData.dark(),
+                                    child: child!,
+                                  );
+                                }).then((value) {
+                              controller.courseStartTimeForAdding = value!.format(context,);
+                            });
+                          },
+                          child: Text(controller.courseStartTimeForAdding==null?"Start Time":"Start Time: ${controller.courseStartTimeForAdding}"));
+                    }),
+                //End date
+                GetBuilder<CoursesController>(
+                    init: _controller,
+                    builder: (controller) {
+                      return ElevatedButton(
+                          onPressed: () {
+                            showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.now(),
+                                builder: (context, child) {
+                                  return Theme(
+                                    data: ThemeData.dark(),
+                                    child: child!,
+                                  );
+                                }).then((value) {
+                              controller.courseEndTimeForAdding = value!.format(context);
+                            });
+                          },
+                          child: Text(controller.courseEndTimeForAdding==null?"End Time":"End Time: ${controller.courseEndTimeForAdding}"));
+                    }),
+              ],
+            ),
           ],
         ),
       ),
